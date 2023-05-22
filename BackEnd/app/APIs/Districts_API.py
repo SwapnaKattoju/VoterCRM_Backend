@@ -13,8 +13,8 @@ application.before_request(lambda: middleware.auth(request))
 
 Districts_API_blueprint = Blueprint("Districts_API", __name__)
 
-@Districts_API_blueprint.route("/admin/districts/by_state", methods=["POST"])
-def get_all_districts_by_state():
+@Districts_API_blueprint.route("/admin/districts_list", methods=["POST"])
+def districts_list():
     state_code = request.json["State_Code"] #Fetch districts by state code
     try:
         districts_by_state = Districts.query.filter_by(State_Code=state_code).all()
@@ -34,6 +34,7 @@ def get_all_districts_by_state():
     except:
             return {"message": "Error deleting districts"}
     
+
     
 @Districts_API_blueprint.route("/admin/add_district", methods=["POST"])
 def add_district():
